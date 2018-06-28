@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "emp")
 public class Emp implements Serializable
@@ -17,22 +20,16 @@ public class Emp implements Serializable
     private static final long serialVersionUID = -5607896222073954614L;
 
     @Id
-    @Column(name = "ename")
+    @Column(name = "ename",
+            nullable = false)
     private String            ename;
 
-    @Column(name = "job")
+    @Column(name = "job",
+            nullable = false)
     private String            job;
 
     @Column(name = "phone")
     private String            phone;
-
-
-
-
-
-    public Emp()
-    {
-    }
 
 
 
@@ -45,60 +42,4 @@ public class Emp implements Serializable
         this.phone = phone;
     }
 
-
-
-
-
-    @Column(name = "ename")
-    public String getEname()
-    {
-        return this.ename;
-    }
-
-
-
-
-
-    @Column(name = "job")
-    public String getJob()
-    {
-        return this.job;
-    }
-
-
-
-
-
-    @Column(name = "phone")
-    public String getPhone()
-    {
-        return this.phone;
-    }
-
-
-
-
-
-    public void setEname(final String ename)
-    {
-        this.ename = ename;
-    }
-
-
-
-
-
-    public void setJob(final String job)
-    {
-        this.job = job;
-    }
-
-
-
-
-
-    public void setPhone(final String phone)
-    {
-        this.phone = phone;
-    }
 }

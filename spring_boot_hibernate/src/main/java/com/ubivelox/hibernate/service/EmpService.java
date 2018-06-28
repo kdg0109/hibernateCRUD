@@ -4,31 +4,27 @@ import java.util.List;
 
 import com.ubivelox.hibernate.model.Emp;
 
+import exception.UbiveloxException;
+
 public interface EmpService
 {
-    public List<Emp> getAllEmps();
+    List<Emp> getAllEmps() throws UbiveloxException;
 
 
 
 
 
-    Emp getEmpByEname(String empEname);
+    Emp addEmp(Emp emp) throws UbiveloxException;
 
 
 
 
 
-    boolean addEmp(Emp emp);
+    Emp updateEmp(Emp emp) throws UbiveloxException;
 
 
 
 
 
-    void updateEmp(Emp emp);
-
-
-
-
-
-    void deleteEmp(String ename);
+    void deleteEmp(String ename) throws UbiveloxException;
 }

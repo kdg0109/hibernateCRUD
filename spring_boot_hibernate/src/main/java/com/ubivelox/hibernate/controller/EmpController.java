@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import com.ubivelox.hibernate.model.Emp;
 import com.ubivelox.hibernate.service.EmpService;
 
+import exception.UbiveloxException;
+
 @Controller
 public class EmpController
 {
@@ -18,7 +20,7 @@ public class EmpController
 
 
 
-    public List<Emp> getAllEmps()
+    public List<Emp> getAllEmps() throws UbiveloxException
     {
         List<Emp> list = this.empService.getAllEmps();
         return list;
@@ -28,20 +30,10 @@ public class EmpController
 
 
 
-    public boolean addEmp(final Emp emp)
+    public Emp addEmp(final Emp empOrg) throws UbiveloxException
     {
-        boolean check = this.empService.addEmp(emp);
+        Emp emp = this.empService.addEmp(empOrg);
 
-        return check;
-    }
-
-
-
-
-
-    public Emp updateEmp(final Emp emp)
-    {
-        this.empService.updateEmp(emp);
         return emp;
     }
 
@@ -49,7 +41,17 @@ public class EmpController
 
 
 
-    public void deleteArticle(final String ename)
+    public Emp updateEmp(final Emp empOrg) throws UbiveloxException
+    {
+        Emp emp = this.empService.updateEmp(empOrg);
+        return emp;
+    }
+
+
+
+
+
+    public void deleteEmp(final String ename) throws UbiveloxException
     {
         this.empService.deleteEmp(ename);
     }
