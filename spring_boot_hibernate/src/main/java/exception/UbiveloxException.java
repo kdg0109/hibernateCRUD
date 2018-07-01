@@ -54,5 +54,4 @@ public class UbiveloxException extends Exception
     {
         super(message, cause);
     }
-
 }

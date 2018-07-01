@@ -6,6 +6,7 @@ import static org.junit.Assert.fail;
 import java.sql.SQLNonTransientException;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -33,10 +34,42 @@ public class CrudTest
 
 
 
+    @Before
+    public void settingTest() throws UbiveloxException
+    {
+
+        List<Emp> emps = this.empController.getAllEmps();
+
+        for ( Emp emp : emps )
+        {
+            this.empController.deleteEmp(emp.getEname());
+        }
+
+        Emp emp = new Emp("김준기", "그룹장", "01011111111");
+        assertEquals(emp, this.empController.addEmp(emp));
+        emp = new Emp("임운혁", "팀잠", "01022222222");
+        assertEquals(emp, this.empController.addEmp(emp));
+        emp = new Emp("송석일", "수석연구원", "01033333333");
+        assertEquals(emp, this.empController.addEmp(emp));
+        emp = new Emp("정성호", "책임연구원", "01044444444");
+        assertEquals(emp, this.empController.addEmp(emp));
+        emp = new Emp("제영호", "책임연구원", "01055555555");
+        assertEquals(emp, this.empController.addEmp(emp));
+        emp = new Emp("유영규", "선임연구원", "01066666666");
+        assertEquals(emp, this.empController.addEmp(emp));
+        emp = new Emp("이태규", "연구원", "01077777777");
+        assertEquals(emp, this.empController.addEmp(emp));
+        emp = new Emp("김동건", "연구원", "01088888888");
+        assertEquals(emp, this.empController.addEmp(emp));
+    }
+
+
+
+
+
     @Test
     public void selectTest() throws UbiveloxException
     {
-
         List<Emp> emps = this.empController.getAllEmps();
 
         for ( Emp emp : emps )
@@ -94,18 +127,14 @@ public class CrudTest
     @Test
     public void deleteTest() throws UbiveloxException
     {
-        String ename = "홍길동";
+        String ename = "유영규";
         this.empController.deleteEmp(ename);
 
-        ename = "유비원";
+        ename = "이태규";
         this.empController.deleteEmp(ename);
 
-        ename = "유비투";
+        ename = "김동건";
         this.empController.deleteEmp(ename);
-
-        ename = "유비쓰리";
-        this.empController.deleteEmp(ename);
-
     }
 
 
@@ -115,20 +144,22 @@ public class CrudTest
     @Test
     public void errorTest() throws UbiveloxException, SQLNonTransientException
     {
-        insertError(new Emp("이태규", "연구원", ""), "DB에 데이터가 이미 존재함");
-        insertError(new Emp("이태규", "", ""), "DB에 데이터가 이미 존재함");
-        insertError(new Emp("", "대리", "01011331333"), "데이터 null 에러");
-        insertError(new Emp("호랑이", "", "01011331333"), "데이터 null 에러");
-        insertError(new Emp("호랑이", "", ""), "데이터 null 에러");
-        insertError(new Emp("", "", "01011331333"), "데이터 null 에러");
-        insertError(new Emp("", "", ""), "데이터 null 에러");
-        insertError(new Emp("", "대리", ""), "데이터 null 에러");
 
-        updateError(new Emp("", "", ""), "DB에 데이터가 없음");
+        // insertError(new Emp("이태규sssssssssssssssssssssss", "연구원", ""), "DB에 데이터가 이미 존재함");
+        insertError(new Emp("이태규", "연구원", ""), "DB에 데이터가 이미 존재함");
+        insertError(new Emp("이태규", "", ""), "데이터 null or Empty 에러");
+        insertError(new Emp("", "대리", "01011331333"), "데이터 null or Empty 에러");
+        insertError(new Emp("호랑이", "", "01011331333"), "데이터 null or Empty 에러");
+        insertError(new Emp("호랑이", "", ""), "데이터 null or Empty 에러");
+        insertError(new Emp("", "", "01011331333"), "데이터 null or Empty 에러");
+        insertError(new Emp("", "", ""), "데이터 null or Empty 에러");
+        insertError(new Emp("", "대리", ""), "데이터 null or Empty 에러");
+
+        updateError(new Emp("", "", ""), "데이터 null or Empty 에러");
         updateError(new Emp("호홓", "연구원", ""), "DB에 데이터가 없음");
         updateError(new Emp("하하히", "연구원", ""), "DB에 데이터가 없음");
-        updateError(new Emp("이태규", "", ""), "데이터 null 에러");
-        updateError(new Emp("이태규", "", ""), "데이터 null 에러");
+        updateError(new Emp("이태규", "", ""), "데이터 null or Empty 에러");
+        updateError(new Emp("이태규", "", ""), "데이터 null or Empty 에러");
 
         deleteError(new Emp("하하히", "연구원", ""), "DB에 데이터가 없음");
         deleteError(new Emp("호홓", "연구원", ""), "DB에 데이터가 없음");
@@ -177,7 +208,7 @@ public class CrudTest
     {
         try
         {
-            this.empController.updateEmp(emp);
+            this.empController.deleteEmp(emp.getEname());
             fail();
         }
         catch ( UbiveloxException e )

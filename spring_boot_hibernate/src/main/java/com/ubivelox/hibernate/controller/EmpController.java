@@ -23,6 +23,7 @@ public class EmpController
     public List<Emp> getAllEmps() throws UbiveloxException
     {
         List<Emp> list = this.empService.getAllEmps();
+
         return list;
     }
 

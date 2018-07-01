@@ -21,14 +21,17 @@ public class Emp implements Serializable
 
     @Id
     @Column(name = "ename",
-            nullable = false)
+            nullable = false,
+            length = 12)
     private String            ename;
 
     @Column(name = "job",
-            nullable = false)
+            nullable = false,
+            length = 20)
     private String            job;
 
-    @Column(name = "phone")
+    @Column(name = "phone",
+            length = 15)
     private String            phone;
 
 
